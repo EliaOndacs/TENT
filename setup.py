@@ -9,7 +9,6 @@ setup(
     author_email='amirreza.ondacs90@gmail.com',
     description='a really really basic and low level app framework',
     url='https://github.com/EliaOndacs/TENT',
-    license=""
 )
 
 
