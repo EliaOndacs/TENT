@@ -60,19 +60,3 @@ class App:
                 node.widget.render(node.depth)
 
 
-# def on(MessageType: str, app: App):
-
-#     def decorator(function: Callable):
-#         objects = app.query(_get_id(MessageType.split(".")[0]))
-#         message = MessageType.split(".")[1]
-
-#         for object in objects:
-#             getattr(object, message).connect(function)
-
-#         @functools.wraps(function)
-#         def wrapper(*args, **kwargs):
-#             return function(*args, **kwargs)
-
-#         return wrapper
-
-#     return decorator
