@@ -1,5 +1,7 @@
 from typing import Any
 
+from signals import Signal
+
 
 def IsRenderable(obj: Any):
     return hasattr(obj, "render")
@@ -45,6 +47,7 @@ class Input(Widget):
         super().__init__()
         self.prompt = prompt
         self.value: str = ""
+        self.Submitted = Signal()
 
     @property
     def prompt(self):
@@ -60,3 +63,4 @@ class Input(Widget):
 
     def render(self, depth: int):
         self.value = input(("    " * depth) + self.prompt)
+        self.Submitted.emit(sender=self)

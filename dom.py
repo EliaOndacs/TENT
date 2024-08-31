@@ -1,5 +1,6 @@
 from typing import Any
 
+from ids import _get_id
 from widgets import Widget
 
 
@@ -31,8 +32,22 @@ class DOMNode:
 
 class DOM:
     def __init__(self) -> None:
-        self.nodes: list[DOMNode] = []
+        self._nodes: list[DOMNode] = []
 
     def __push__(self, object: DOMNode):
         if isinstance(object, DOMNode):
-            self.nodes.append(object)
+            self._nodes.append(object)
+
+    @property
+    def nodes(self):
+        yield from self._nodes
+
+    def query_one(self, selector: str):
+        _id = _get_id(selector)
+        for node in self.nodes:
+            if node.id == _id:
+                return node.widget
+
+    def query(self, selector: str) -> list:
+        _id = _get_id(selector)
+        return [node.widget for node in self.nodes if node.id == _id]
