@@ -1,6 +1,6 @@
 import functools
 from typing import Callable, Generator
-from dom import DOM, DOMNode
+from dom import DOM, DOMContainer, DOMNode
 from utils import push
 from widgets import IsRenderable, Widget
 from ids import _get_id
@@ -19,8 +19,11 @@ class App:
     def query(self, selector: str):
         return self._dom.query(selector)
 
-    def compose(self) -> ComposeResult: ...
-    def messages(self) -> MessagesResult: ...
+    def compose(self) -> ComposeResult:
+        yield from ()
+
+    def messages(self) -> MessagesResult:
+        yield from ()
 
     def _pack(self):
         for item in self.compose():

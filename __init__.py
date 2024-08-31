@@ -4,23 +4,18 @@
           developed and made by EliaOndacs
 """
 
-from app import App, ComposeResult, MessagesResult
-from signals import slot
-from widgets import Checkbox, Label, Text, Input
-from ansi.colour import *
+from app import App, ComposeResult
+from widgets import Label, Text, Widget
 
-def IsNumber(value: str):
-    return value.isnumeric()
+
+class MyWidget(Widget):
+    def render(self, depth: int) -> None:
+        print(f"depth:{depth}")
+
+
 class MyApp(App):
     def compose(self) -> ComposeResult:
-        yield Input("enter a number: ",validator=IsNumber), "test"
-
-    def messages(self) -> MessagesResult:
-        yield ["#test.Submitted", self.test_function]
-
-    @slot
-    def test_function(self, event):
-        print(f"current value is {int(event.object.ReturnValue)}")
+        yield Text("hello, world!")
 
 
 def main():

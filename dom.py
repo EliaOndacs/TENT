@@ -30,6 +30,28 @@ class DOMNode:
         self.attributes.__getitem__(name)
 
 
+# class DOMContainer:
+#     def __init__(
+#         self, *children: list[DOMNode], _id: str | None = None, depth: int = 0
+#     ) -> None:
+#         self.children: list[DOMNode] = children
+#         for child in children:
+#             child.depth = depth + 1
+#         self.id = _id
+#         self.depth = depth
+
+#     @property
+#     def depth(self):
+#         return self._depth
+
+#     @depth.setter
+#     def depth(self, new: int):
+#         self._depth = new
+
+#     def get_child(self):
+#         return self.children
+
+
 class DOM:
     def __init__(self) -> None:
         self._nodes: list[DOMNode] = []
@@ -37,6 +59,8 @@ class DOM:
     def __push__(self, object: DOMNode):
         if isinstance(object, DOMNode):
             self._nodes.append(object)
+        # elif isinstance(object, DOMContainer):
+        #     self._nodes.extend(object.get_child())
 
     @property
     def nodes(self):
