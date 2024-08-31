@@ -47,6 +47,7 @@ class DOM:
         for node in self.nodes:
             if node.id == _id:
                 return node.widget
+        return None
 
     def query(self, selector: str) -> list:
         _id = _get_id(selector)
