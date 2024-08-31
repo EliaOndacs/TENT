@@ -1,4 +1,7 @@
-from setuptools import setup, find_packages
+# from setuptools import setup, find_packages
+
+def setup(*args,**kwargs): ...
+def find_packages(): ...
 
 setup(
     name="tent",
