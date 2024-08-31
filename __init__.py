@@ -6,23 +6,21 @@
 
 from app import App, ComposeResult, MessagesResult
 from signals import slot
-from widgets import Text, Input
+from widgets import Checkbox, Label, Text, Input
 from ansi.colour import *
 
-
+def IsNumber(value: str):
+    return value.isnumeric()
 class MyApp(App):
     def compose(self) -> ComposeResult:
-        yield Text(f"hello, user!\n{fg.yellow}what is your name?")
-        yield Input(f"\t{fx.reset+fx.blink}:{fx.reset+fg.cyan}"), "user_name"
-        yield Text(f"NULL"), "text"
+        yield Input("enter a number: ",validator=IsNumber), "test"
 
     def messages(self) -> MessagesResult:
-        yield ["#user_name.Submitted", self.test_function]
+        yield ["#test.Submitted", self.test_function]
 
     @slot
     def test_function(self, event):
-        msg = f"{fx.reset}hello, {fg.green}{event.object.ReturnValue}{fx.reset}!"
-        self.query_one("#text").value = msg
+        print(f"current value is {int(event.object.ReturnValue)}")
 
 
 def main():
