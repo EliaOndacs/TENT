@@ -99,6 +99,7 @@ class Checkbox(Widget):
         self.state: bool = False
         self.prompt = prompt
         self.Submitted = Signal()
+        self.Change = Signal()
 
     @property
     def prompt(self):
@@ -127,6 +128,7 @@ class Checkbox(Widget):
             print(end="\b")
             if key == "":
                 self.state = not self.state
+                self.Change.emit(sender=self)
         print("\033[A\033[A")
         self.Submitted.emit(sender=self)
 
